@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="401.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonld.ps.finalflashcard.presentation.flashcard.FlashcardPresenter">
+   <children>
+      <Text fx:id="topicName" fill="#415897" fontSmoothingType="LCD" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="107.63671875">
+         <font>
+            <Font name="Arial" size="21.0" />
+         </font>
+      </Text>
+      <SplitPane dividerPositions="0.29797979797979796" layoutX="8.0" layoutY="48.0" prefHeight="353.0" prefWidth="622.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="351.0" prefWidth="202.0">
+               <children>
+                  <GridPane alignment="TOP_CENTER" layoutY="27.0" prefHeight="290.0" prefWidth="176.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="77.5" minHeight="9.5" prefHeight="30.5" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="154.5" minHeight="0.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="201.5" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="201.5" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="201.5" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="45.5" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total flashcard:" />
+                        <Text fx:id="totalFlashcard" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Everday: " GridPane.rowIndex="1" />
+                        <Text fx:id="everydayBox" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Everday three day: " wrappingWidth="75.265625" GridPane.rowIndex="2" />
+                        <Text fx:id="everyThreedayBox" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Everyweek:" GridPane.rowIndex="3" />
+                        <Text fx:id="everyweekBox" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Every two weeks:" GridPane.rowIndex="4" />
+                        <Text fx:id="twoweekBox" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Every month" GridPane.rowIndex="5" />
+                        <Text fx:id="everymonthBox" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane fx:id="learningDisplay" minHeight="0.0" minWidth="0.0" prefHeight="351.0" prefWidth="409.0">
+               <children>
+                  <Button fx:id="startLearningButton" layoutX="156.0" layoutY="95.0" mnemonicParsing="false" prefHeight="124.0" prefWidth="127.0" text="Start" textFill="#130f85">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
