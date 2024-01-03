@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -28,6 +30,8 @@ public class TopicPresenter implements Initializable {
     @FXML
     private VBox topicContainer;
     private TopicService topicService;
+
+    private Button backButton;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         topicService = new TopicService();
@@ -64,7 +68,8 @@ public class TopicPresenter implements Initializable {
             AnchorPane parent = (AnchorPane) topicTable.getParent();
             parent.getChildren().clear();
             parent.getChildren().add(root);
-
+            Stage stage = (Stage) parent.getScene().getWindow();
+            stage.sizeToScene();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
