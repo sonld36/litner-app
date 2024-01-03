@@ -1,5 +1,7 @@
 package com.sonld.ps.finalflashcard.business.model;
 
+import com.google.gson.annotations.JsonAdapter;
+import com.sonld.ps.finalflashcard.business.common.DateConverter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -21,6 +23,8 @@ public class SessionLearningState implements Serializable {
     private Instant timeEnd;
     private IntegerProperty totalCard;
 
+    private IntegerProperty currentIndexCard;
+
     public SessionLearningState(String topicId) {
         this.topicId = topicId;
         this.timesCorrect = new SimpleIntegerProperty(0);
@@ -28,6 +32,7 @@ public class SessionLearningState implements Serializable {
         this.totalCard = new SimpleIntegerProperty(0);
         this.flashcardLearningSessionDTOList = new ArrayList<>();
         this.timeStart = new Date().toInstant();
+        this.currentIndexCard = new SimpleIntegerProperty(0);
     }
 
     public void addFlashcardLearningSession(FlashcardResponse flashcard, boolean isCorrect) {
@@ -81,6 +86,18 @@ public class SessionLearningState implements Serializable {
         this.totalCard.set(totalCard);
     }
 
+    public int getCurrentIndexCard() {
+        return currentIndexCard.get();
+    }
+
+    public IntegerProperty currentIndexCardProperty() {
+        return currentIndexCard;
+    }
+
+    public void setCurrentIndexCard(int currentIndexCard) {
+        this.currentIndexCard.set(currentIndexCard);
+    }
+
     public ResultLearningSessionDTO ofResult() {
         ResultLearningSessionDTO resultLearningSessionDTO = new ResultLearningSessionDTO();
         resultLearningSessionDTO.setFlashcardLearningSessionDTOList(this.flashcardLearningSessionDTOList);
@@ -97,6 +114,7 @@ public class SessionLearningState implements Serializable {
         private String id;
         private boolean isCorrect;
 
+        @JsonAdapter(DateConverter.class)
         private Instant timeAnswer;
 
         public FlashcardLearningSession(String id, boolean isCorrect, Instant timeAnswer) {

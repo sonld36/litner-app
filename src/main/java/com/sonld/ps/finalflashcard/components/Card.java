@@ -21,12 +21,14 @@ public class Card extends StackPane {
     public Card(Node front, Node back) {
         super();
 
-        Rectangle card = new Rectangle(300, 250);
+        Rectangle card = new Rectangle(400, 350);
         card.setFill(Color.LIGHTBLUE); // Set the background color
         card.setStroke(Color.DARKBLUE); // Set the border color
         card.setStrokeWidth(2); // Set the border width
         card.setArcWidth(20); // Set the horizontal corner radius
         card.setArcHeight(20);
+        front.setVisible(true);
+        back.setVisible(false);
 
         StackPane.setAlignment(front, Pos.CENTER);
         StackPane.setAlignment(back, Pos.CENTER);

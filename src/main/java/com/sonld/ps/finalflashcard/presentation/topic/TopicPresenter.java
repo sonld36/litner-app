@@ -4,15 +4,19 @@ import com.sonld.ps.finalflashcard.HelloApplication;
 import com.sonld.ps.finalflashcard.business.model.Pagination;
 import com.sonld.ps.finalflashcard.business.model.TopicResponse;
 import com.sonld.ps.finalflashcard.business.service.TopicService;
+import com.sonld.ps.finalflashcard.components.DialogCreateFlashCard;
+import com.sonld.ps.finalflashcard.components.DialogCreateTopicView;
 import com.sonld.ps.finalflashcard.presentation.flashcard.FlashcardPresenter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,7 +35,6 @@ public class TopicPresenter implements Initializable {
     private VBox topicContainer;
     private TopicService topicService;
 
-    private Button backButton;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         topicService = new TopicService();
@@ -45,7 +48,7 @@ public class TopicPresenter implements Initializable {
                     var topicButton = topicResponse.createTopic();
                     topicButton.setOnMouseClicked(mouseEvent -> {
                         try {
-                            setActionForTopicButton(topicResponse);
+                            setActionForTopicButton(topicResponse, mouseEvent);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -59,17 +62,21 @@ public class TopicPresenter implements Initializable {
         }
     }
 
-    private void setActionForTopicButton(TopicResponse topicButton) throws IOException {
+    private void setActionForTopicButton(TopicResponse topicButton, MouseEvent event) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("flashcard.fxml"));
             Parent root = loader.load();
             FlashcardPresenter flashcardPresenter = loader.getController();
             flashcardPresenter.setCurrentTopic(topicButton);
-            AnchorPane parent = (AnchorPane) topicTable.getParent();
-            parent.getChildren().clear();
-            parent.getChildren().add(root);
-            Stage stage = (Stage) parent.getScene().getWindow();
-            stage.sizeToScene();
+            Scene scene = ((Node)event.getSource()).getScene();
+            Button createFlashcard = (Button) scene.lookup("#createButton");
+            createFlashcard.setOnMouseClicked(event1 -> {
+                DialogCreateFlashCard dialogCreateTopicView = new DialogCreateFlashCard(topicButton.getId());
+                dialogCreateTopicView.showAndWait();
+            });
+            AnchorPane mainContent = (AnchorPane) scene.lookup("#mainContent");
+            mainContent.getChildren().clear();
+            mainContent.getChildren().add(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,17 +1,22 @@
 package com.sonld.ps.finalflashcard.business.model;
 
+import com.google.gson.annotations.JsonAdapter;
+import com.sonld.ps.finalflashcard.business.common.Base64DataAdapter;
 import com.sonld.ps.finalflashcard.business.common.Constant;
 import com.sonld.ps.finalflashcard.components.Card;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 public class FlashcardResponse {
     private String id;
     private String question;
     private String answer;
-    private Constant.TypeTextFlashCard type;
+
+    @JsonAdapter(Base64DataAdapter.class)
+    private byte[] image;
     private String topicId;
     private Constant.BoxLevel boxLevel;
     private Date lastReview;
@@ -51,12 +56,12 @@ public class FlashcardResponse {
         this.answer = answer;
     }
 
-    public Constant.TypeTextFlashCard getType() {
-        return type;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setType(Constant.TypeTextFlashCard type) {
-        this.type = type;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public String getTopicId() {

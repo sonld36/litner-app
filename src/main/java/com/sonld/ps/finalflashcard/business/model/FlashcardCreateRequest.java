@@ -8,14 +8,14 @@ public class FlashcardCreateRequest {
     private String answer;
 
     private String question;
-    private Constant.TypeTextFlashCard type;
+    private byte[] image;
     private String topicId;
     private List<String> notes;
 
-    public FlashcardCreateRequest(String answer, String question, Constant.TypeTextFlashCard type, String topicId) {
+    public FlashcardCreateRequest(String answer, String question, byte[] image, String topicId) {
         this.answer = answer;
         this.question = question;
-        this.type = type;
+        this.image = image;
         this.topicId = topicId;
     }
 }

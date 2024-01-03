@@ -3,11 +3,14 @@ package com.sonld.ps.finalflashcard.presentation.flashcard;
 import com.sonld.ps.finalflashcard.HelloApplication;
 import com.sonld.ps.finalflashcard.business.api.APIInterface;
 import com.sonld.ps.finalflashcard.business.model.TopicResponse;
+import com.sonld.ps.finalflashcard.components.DialogCreateFlashCard;
+import com.sonld.ps.finalflashcard.components.DialogCreateTopicView;
 import com.sonld.ps.finalflashcard.presentation.learning.LearningPresenter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -40,7 +43,6 @@ public class FlashcardPresenter implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
     public void setCurrentTopic(TopicResponse topic) {
         this.currentTopic = topic;

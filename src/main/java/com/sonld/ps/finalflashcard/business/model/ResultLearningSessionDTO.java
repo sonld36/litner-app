@@ -1,6 +1,7 @@
 package com.sonld.ps.finalflashcard.business.model;
 
 import com.google.gson.annotations.JsonAdapter;
+import com.sonld.ps.finalflashcard.business.common.DateConverter;
 
 import java.time.Instant;
 import java.util.List;
@@ -11,10 +12,10 @@ public class ResultLearningSessionDTO {
     private int timesCorrect;
     private int timesIncorrect;
 
-//    @JsonAdapter(DateConverter.class)
+    @JsonAdapter(DateConverter.class)
     private Instant timeStart;
 
-//    @JsonAdapter(DateConverter.class)
+    @JsonAdapter(DateConverter.class)
     private Instant timeEnd;
     private int totalCard;
 

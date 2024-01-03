@@ -13,6 +13,7 @@ module com.sonld.ps.finalflashcard {
     opens com.sonld.ps.finalflashcard.presentation.learning to javafx.fxml;
 
     opens com.sonld.ps.finalflashcard.business.model to com.google.gson;
+    opens com.sonld.ps.finalflashcard.business.common to com.google.gson;
     exports com.sonld.ps.finalflashcard;
     exports com.sonld.ps.finalflashcard.components;
     exports com.sonld.ps.finalflashcard.presentation.maincontrol;
