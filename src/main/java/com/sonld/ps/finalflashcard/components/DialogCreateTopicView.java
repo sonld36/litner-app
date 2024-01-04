@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class DialogCreateTopicView extends Dialog<TopicCreateRequest> {
+public class DialogCreateTopicView extends Dialog<Boolean> {
     private final TextField nameField = new TextField();
     private final TextField descriptionField = new TextField();
     private final TextField categoryField = new TextField();
@@ -40,18 +40,21 @@ public class DialogCreateTopicView extends Dialog<TopicCreateRequest> {
                         alert.setTitle("Information Dialog");
                         alert.setHeaderText(null);
                         alert.setContentText("Topic created successfully");
+                        alert.showAndWait();
+                        return true;
                     } else {
                         alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Information Dialog");
                         alert.setHeaderText(null);
                         alert.setContentText("Topic created error");
+                        alert.showAndWait();
+                        return false;
                     }
-                    alert.showAndWait();
+
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    return false;
                 }
-            }
-            return topicCreateRequest;
+            } else return false;
         });
 
         this.setTitle("Create Topic");

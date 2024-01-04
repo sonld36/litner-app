@@ -121,10 +121,6 @@ public class LearningPresenter implements Initializable {
         return null;
     }
 
-
-
-
-
     private Button finishButton(String topicId) {
         Button finishButton = new Button("Finish");
         finishButton.setOnMouseClicked((e) -> {

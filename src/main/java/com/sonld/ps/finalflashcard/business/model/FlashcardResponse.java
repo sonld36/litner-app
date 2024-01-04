@@ -4,10 +4,12 @@ import com.google.gson.annotations.JsonAdapter;
 import com.sonld.ps.finalflashcard.business.common.Base64DataAdapter;
 import com.sonld.ps.finalflashcard.business.common.Constant;
 import com.sonld.ps.finalflashcard.components.Card;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -106,8 +108,11 @@ public class FlashcardResponse {
 
     public Card toCard() {
         ImageView imageCurrentView = createImageView(this.getImage());
-        VBox answerCurrentNode = imageCurrentView != null ? new VBox(imageCurrentView, createText(this.getAnswer())) : new VBox(createText(this.getAnswer()));
-        answerCurrentNode.setSpacing(10);
+        Node answerCurrentNode = imageCurrentView != null ? new VBox(imageCurrentView, createText(this.getAnswer())) : createText(this.getAnswer());
+        if (answerCurrentNode instanceof VBox) {
+            ((VBox) answerCurrentNode).setSpacing(10);
+            ((VBox) answerCurrentNode).setAlignment(Pos.CENTER);
+        }
         return new Card(createText(this.getQuestion()), answerCurrentNode);
     }
 

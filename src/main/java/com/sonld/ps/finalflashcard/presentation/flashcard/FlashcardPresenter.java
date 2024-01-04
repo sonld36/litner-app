@@ -54,10 +54,10 @@ public class FlashcardPresenter implements Initializable {
                 Parent root = loader.load();
                 LearningPresenter learningPresenter = loader.getController();
                 learningPresenter.getDataFromTopicId(currentTopic.getId());
-                AnchorPane.setTopAnchor(root, 0.0);
-                AnchorPane.setRightAnchor(root, 0.0);
-                AnchorPane.setBottomAnchor(root, 0.0);
-                AnchorPane.setLeftAnchor(root, 0.0);
+                AnchorPane.setTopAnchor(root, 20.0);
+                AnchorPane.setRightAnchor(root, 30.0);
+                AnchorPane.setBottomAnchor(root, 20.0);
+                AnchorPane.setLeftAnchor(root, 30.0);
                 learningDisplay.getChildren().add(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
