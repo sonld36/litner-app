@@ -6,7 +6,15 @@ import com.sonld.ps.finalflashcard.business.common.Constant;
 import com.sonld.ps.finalflashcard.components.Card;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
@@ -96,7 +104,28 @@ public class FlashcardResponse {
         this.notes = notes;
     }
 
-    public Card toCard(Node front, Node back) {
-        return new Card(front, back);
+    public Card toCard() {
+        ImageView imageCurrentView = createImageView(this.getImage());
+        VBox answerCurrentNode = imageCurrentView != null ? new VBox(imageCurrentView, createText(this.getAnswer())) : new VBox(createText(this.getAnswer()));
+        answerCurrentNode.setSpacing(10);
+        return new Card(createText(this.getQuestion()), answerCurrentNode);
+    }
+
+    private Text createText(String text) {
+        Text textNode = new Text(text);
+        textNode.setWrappingWidth(350);
+        textNode.setTextAlignment(TextAlignment.JUSTIFY);
+        textNode.setFont(Font.font("Arial", 15));
+        return textNode;
+    }
+
+    private ImageView createImageView(byte[] image) {
+        if (image == null) return null;
+        InputStream is = new ByteArrayInputStream(image);
+        Image img = new Image(is);
+        ImageView imageView = new ImageView(img);
+        imageView.setFitHeight(280);
+        imageView.setFitWidth(370);;
+        return imageView;
     }
 }

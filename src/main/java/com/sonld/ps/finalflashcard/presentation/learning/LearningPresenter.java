@@ -7,6 +7,7 @@ import com.sonld.ps.finalflashcard.business.model.SessionLearningState;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -36,7 +37,7 @@ public class LearningPresenter implements Initializable {
     @FXML
     private Button correctButton;
     @FXML
-    private Pane flashcardDisplay;
+    private AnchorPane flashcardDisplay;
     private SessionLearningState sessionLearningState;
 
     @Override
@@ -51,15 +52,9 @@ public class LearningPresenter implements Initializable {
             if (flashcard.isEmpty()) return;
             sessionLearningState = new SessionLearningState(topicId);
             var currentCard = flashcard.get(sessionLearningState.getCurrentIndexCard());
-            ImageView imageCurrentView = createImageView(currentCard.getImage());
-            VBox answerCurrentNode = imageCurrentView != null ? new VBox(imageCurrentView, createText(currentCard.getAnswer())) : new VBox(createText(currentCard.getAnswer()));
-            answerCurrentNode.setTranslateX(20);
-            answerCurrentNode.setTranslateY(10);
-            answerCurrentNode.setSpacing(10);
-            VBox.setVgrow(answerCurrentNode, Priority.ALWAYS);
-            var flashcardCurrentItem = currentCard.toCard(createText(currentCard.getQuestion()), answerCurrentNode);
-            flashcardCurrentItem.setTranslateX(35);
-            flashcardCurrentItem.setTranslateY(20);
+            var flashcardCurrentItem = currentCard.toCard();
+//            flashcardCurrentItem.setTranslateX(35);
+//            flashcardCurrentItem.setTranslateY(20);
             flashcardDisplay.getChildren().add(flashcardCurrentItem);
 
 
@@ -83,22 +78,13 @@ public class LearningPresenter implements Initializable {
                 if (newValue.intValue() >= 0 && newValue.intValue() < flashcard.size()) {
                     flashcardDisplay.getChildren().clear();
                     var currentFlashcard = flashcard.get(newValue.intValue());
-                    ImageView imageView = createImageView(currentFlashcard.getImage());
-                    VBox answerNode = imageView != null ? new VBox(imageView, createText(currentFlashcard.getAnswer())) : new VBox(createText(currentFlashcard.getAnswer()));
-                    answerNode.setTranslateX(20);
-                    answerNode.setTranslateY(10);
-                    answerNode.setSpacing(10);
-                    VBox.setVgrow(answerNode, Priority.ALWAYS);
-                    var flashcardItem = currentFlashcard.toCard(createText(currentFlashcard.getQuestion()), answerNode);
-                    flashcardItem.setTranslateX(35);
-                    flashcardItem.setTranslateY(20);
+                    var flashcardItem = currentFlashcard.toCard();
+
                     flashcardDisplay.getChildren().add(flashcardItem);
                 } else {
                     flashcardDisplay.getChildren().clear();
                     var flashcardItem = new VBox();
                     flashcardItem.setPrefSize(400, 300);
-                    flashcardItem.setTranslateX(35);
-                    flashcardItem.setTranslateY(20);
                     flashcardItem.setStyle("-fx-background-color: #f5f5f5");
                     Text text = new Text("You have finished learning this topic");
                     Button finishButton = finishButton(topicId);
@@ -135,23 +121,9 @@ public class LearningPresenter implements Initializable {
         return null;
     }
 
-    private ImageView createImageView(byte[] image) {
-        if (image == null) return null;
-        InputStream is = new ByteArrayInputStream(image);
-        Image img = new Image(is);
-        ImageView imageView = new ImageView(img);
-        imageView.setFitHeight(280);
-        imageView.setFitWidth(370);;
-        return imageView;
-    }
 
-    private Text createText(String text) {
-        Text textNode = new Text(text);
-        textNode.setWrappingWidth(350);
-        textNode.setTextAlignment(TextAlignment.JUSTIFY);
-        textNode.setFont(Font.font("Arial", 15));
-        return textNode;
-    }
+
+
 
     private Button finishButton(String topicId) {
         Button finishButton = new Button("Finish");
